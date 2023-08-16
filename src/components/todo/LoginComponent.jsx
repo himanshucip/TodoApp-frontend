@@ -1,14 +1,18 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate} from 'react-router-dom'
+import { AuthContext} from './security/AuthContext';
+
+
 
 
 
 function LoginComponent(){
     const[username, setUsername] = useState("");
     const[password, setPass] = useState("");
-    const[success, setSuccess] = useState(false);
+    
     const[error, setError] = useState(false);
-   const navigate = useNavigate();
+    const navigate = useNavigate();
+    const auth = useContext(AuthContext)
 
     function handleUser(event){
         console.log(event.target.value);
@@ -19,14 +23,11 @@ function LoginComponent(){
         setPass(event.target.value);
     }
 
-    function handleSubmit(){
-        if(username === "himanshu" && password === "123"){
-            setSuccess(true);
-            setError(false);
+    async function handleSubmit(){
+        if(await auth.login(username,password)){
             navigate(`/welcome/${username}`);
         }
         else{
-            setSuccess(false);
             setError(true);
         }
     }
@@ -56,7 +57,7 @@ function LoginComponent(){
 
     return(
         <div className="login">
-            {success && <div className='successMsg'>login done</div>}
+            
             {error && <div className='errorMsg'>login error</div>}
             <div>
                 <label>Username : </label>
