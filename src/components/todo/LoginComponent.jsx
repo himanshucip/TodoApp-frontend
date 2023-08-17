@@ -69,7 +69,7 @@ function LoginComponent(){
                 <input type="password" name="pass" value={password} onChange={handlePass}></input>
             </div>
             <div>
-               <button type="submit" name="login-btn" onClick={handleSubmit}>Login</button>
+               <button className='btn btn-success m-3' type="submit" name="login-btn" onClick={handleSubmit}>Login</button>
             </div>
         </div>
     )

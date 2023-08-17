@@ -26,9 +26,6 @@ import { apiClient } from "../api/ApiClient";
     //    
     
     async function login(username, password){
-
-      
-
     try{
        const response = await executeJwtAuthenticationService(username, password)
       
